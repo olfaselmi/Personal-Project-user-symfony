@@ -1,0 +1,6 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+user_index:
+    path: /user
+    controller: App\Controller\UserController::index
