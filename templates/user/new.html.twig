@@ -1,11 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}User {% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+    <h1>Users </h1>
 
-    {{ include('user/_form.html.twig') }}
+    <table class="table" border="2">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
+              
+                <td>
+                <button type="button" class="btn btn-info">                 
+                 <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+</button>
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+<button type="button" class="btn btn-success">                   
+ <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+</button>
+
+                    <button type="button" class="btn btn-danger">                   
+                     <a href="{{ path('app_user_delete', {'id': user.id}) }}">delete</a>
+</button>
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<button type="button" class="btn btn-success">    <a href="{{ path('app_user_new') }}">Create new</a>
+</button>
+
 {% endblock %}
+
+
+
+
+
+

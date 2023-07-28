@@ -18,13 +18,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+    #[ORM\Column(type: 'string', length: 100)]
+    private $lastname;
+
+    #[ORM\Column(type: 'string', length: 100)]
+    private $firstname;
+
     #[ORM\Column]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $password = null;
 
     public function getId(): ?int
@@ -40,6 +46,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): static
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): static
+    {
+        $this->firstname = $firstname;
 
         return $this;
     }
@@ -76,7 +106,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }

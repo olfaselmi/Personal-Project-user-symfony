@@ -1,4 +1,5 @@
 <?php
+//phpinfo();
 
 use App\Kernel;
 
